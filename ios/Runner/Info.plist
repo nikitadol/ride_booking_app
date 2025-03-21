@@ -44,5 +44,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>DART_DEFINES</key>
+	<string>$(DART_DEFINES)</string>
 </dict>
 </plist>

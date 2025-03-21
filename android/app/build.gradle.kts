@@ -1,3 +1,5 @@
+import java.util.Base64
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -28,6 +30,21 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+
+        val dartEnvironmentVariables = mutableMapOf<String, String>()
+
+        if (project.hasProperty("dart-defines")) {
+            val dartDefines = project.property("dart-defines") as String
+            dartDefines.split(",").forEach { entry ->
+                val decoded = String(Base64.getDecoder().decode(entry), Charsets.UTF_8)
+                val pair = decoded.split("=")
+                if (pair.size == 2) {
+                    dartEnvironmentVariables[pair[0]] = pair[1]
+                }
+            }
+        }
+
+        manifestPlaceholders.putAll(dartEnvironmentVariables)
     }
 
     buildTypes {
