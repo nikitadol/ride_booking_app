@@ -15,9 +15,7 @@ Basic Ride Booking App
 
 # Video
 
-<video src="https://github.com/nikitadol/ride_booking_app/raw/refs/heads/main/media/1.mp4" controls width="640">
-  No video
-</video>
+![Video](media/1.mp4)
 
 # Screenshots
 
