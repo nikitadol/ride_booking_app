@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ride_booking_app/common/provider/autocomplete_session_token_provider.dart';
+import 'package:ride_booking_app/common/provider/locale_provider.dart';
 import 'package:ride_booking_app/component/error_component.dart';
 import 'package:ride_booking_app/localization/app_localizations.dart';
 import 'package:ride_booking_app/repository/location_autocomplete_repository.dart';

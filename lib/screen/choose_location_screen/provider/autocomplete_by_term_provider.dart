@@ -17,7 +17,7 @@ Future<List<AutocompleteItem>> _autocompleteByTerm(Ref ref, String term) async {
 
   final results = await locationAutocomplete.autocomplete(
     input: term,
-    language: 'en',
+    language: ref.watch(appLocaleTagProvider),
     sessionToken: sessionToken,
   );
 

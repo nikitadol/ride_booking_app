@@ -33,7 +33,11 @@ class _Point extends _$Point {
     final sessionToken = ref.read(autocompleteSessionTokenProvider);
     final res = await ref
         .read(locationAutocompleteRepositoryProvider)
-        .placeDetails(id: id, language: 'en', sessionToken: sessionToken);
+        .placeDetails(
+          id: id,
+          language: ref.watch(appLocaleTagProvider),
+          sessionToken: sessionToken,
+        );
 
     final position = res.asValue?.value;
     if (position != null) {

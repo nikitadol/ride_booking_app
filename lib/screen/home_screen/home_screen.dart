@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ride_booking_app/common/provider/autocomplete_session_token_provider.dart';
+import 'package:ride_booking_app/common/provider/locale_provider.dart';
 import 'package:ride_booking_app/component/main_map_component.dart';
 import 'package:ride_booking_app/constants/constants.dart';
 import 'package:ride_booking_app/localization/app_localizations.dart';
