@@ -4,27 +4,29 @@ class _Maps extends ConsumerWidget {
   const _Maps();
 
   static Marker _buildMarker(PointType pointType, LatLng position) {
-    return MainMapComponent.buildMarker(
-      id: pointType.name,
+    return Marker(
+      markerId: MarkerId(pointType.name),
       position: position,
-      iconColor: switch (pointType) {
+      icon: BitmapDescriptor.defaultMarkerWithHue(switch (pointType) {
         PointType.pickUp => BitmapDescriptor.hueYellow,
         PointType.dropOff => BitmapDescriptor.hueRed,
-      },
+      }),
+      onTap: null,
+      zIndex: 0.0,
     );
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final localizations = AppLocalizations.of(context)!;
-    final pickUpPoint = ref.watch(_pointProvider(PointType.pickUp))?.position;
-    final dropOffPoint = ref.watch(_pointProvider(PointType.dropOff))?.position;
+    final pickUpPoint = ref.watch(pointProvider(PointType.pickUp))?.position;
+    final dropOffPoint = ref.watch(pointProvider(PointType.dropOff))?.position;
 
     return MainMapComponent(
       onTap: (position) {
         VoidCallback select(PointType pointType) {
           return () {
-            ref.read(_pointProvider(pointType).notifier).newPosition(position);
+            ref.read(pointProvider(pointType).notifier).newPosition(position);
             Navigator.pop(context);
           };
         }

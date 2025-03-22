@@ -1,7 +1,7 @@
 part of '../home_screen.dart';
 
 @riverpod
-class _Passengers extends _$Passengers {
+class Passengers extends _$Passengers {
   @override
   int? build() {
     return null;

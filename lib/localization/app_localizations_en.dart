@@ -55,4 +55,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get typeSomething => 'Type something';
+
+  @override
+  String get confirmRideTitle => 'Confirm ride';
+
+  @override
+  String passangers(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count passengers',
+      one: '1 passenger',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get booked => 'Ride booked';
 }

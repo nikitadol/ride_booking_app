@@ -14,5 +14,9 @@
   "process": "Process",
   "time": "Time",
   "selectPickUpTime": "Select pick-up time",
-  "typeSomething": "Type something"
+  "typeSomething": "Type something",
+  "confirmRideTitle": "Confirm ride",
+  "passangers": "{count, plural, =1{1 passenger} other{{count} passengers}}",
+  "confirm": "Confirm",
+  "booked": "Ride booked"
 }

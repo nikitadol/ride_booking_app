@@ -6,7 +6,7 @@ class _TimePicker extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final localizations = AppLocalizations.of(context)!;
-    final time = ref.watch(_timeProvider);
+    final time = ref.watch(timeProvider);
 
     final String text;
     if (time == null) {
@@ -26,7 +26,7 @@ class _TimePicker extends ConsumerWidget {
         );
 
         if (res != null) {
-          ref.read(_timeProvider.notifier).newTime(res);
+          ref.read(timeProvider.notifier).newTime(res);
         }
       },
       borderRadius: const BorderRadius.horizontal(

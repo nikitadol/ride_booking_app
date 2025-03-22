@@ -188,6 +188,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Type something'**
   String get typeSomething;
+
+  /// No description provided for @confirmRideTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm ride'**
+  String get confirmRideTitle;
+
+  /// No description provided for @passangers.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 passenger} other{{count} passengers}}'**
+  String passangers(num count);
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @booked.
+  ///
+  /// In en, this message translates to:
+  /// **'Ride booked'**
+  String get booked;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

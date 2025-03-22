@@ -1,7 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:ride_booking_app/common/extensions/google_maps_extensions.dart';
 import 'package:ride_booking_app/constants/constants.dart';
 
 class MainMapComponent extends StatefulWidget {
@@ -9,22 +8,6 @@ class MainMapComponent extends StatefulWidget {
 
   final void Function(LatLng mapCoordinate)? onTap;
   final Set<Marker> markers;
-
-  static Marker buildMarker({
-    required String id,
-    required LatLng position,
-    required double iconColor,
-    double zIndex = 0.0,
-    VoidCallback? onTap,
-  }) {
-    return Marker(
-      markerId: MarkerId(id),
-      position: position,
-      icon: BitmapDescriptor.defaultMarkerWithHue(iconColor),
-      onTap: onTap,
-      zIndex: zIndex,
-    );
-  }
 
   @override
   State<MainMapComponent> createState() => _MainMapComponentState();
@@ -38,9 +21,13 @@ class _MainMapComponentState extends State<MainMapComponent> {
     super.didUpdateWidget(oldWidget);
 
     if (widget.markers.isNotEmpty) {
-      final bounds = _computeBounds(widget.markers.map((e) => e.position));
+      final bounds = widget.markers.map((e) => e.position).computeBounds();
 
       controller.animateCamera(CameraUpdate.newLatLngBounds(bounds, 32));
+    } else {
+      if (oldWidget.markers.isNotEmpty) {
+        controller.animateCamera(AppConstants.alpsCameraUpdate);
+      }
     }
   }
 
@@ -65,20 +52,4 @@ class _MainMapComponentState extends State<MainMapComponent> {
       },
     );
   }
-}
-
-LatLngBounds _computeBounds(Iterable<LatLng> positions) {
-  final firstLatLng = positions.first;
-  var s = firstLatLng.latitude;
-  var n = firstLatLng.latitude;
-  var w = firstLatLng.longitude;
-  var e = firstLatLng.longitude;
-
-  for (final position in positions) {
-    s = min(s, position.latitude);
-    n = max(n, position.latitude);
-    w = min(w, position.longitude);
-    e = max(e, position.longitude);
-  }
-  return LatLngBounds(southwest: LatLng(s, w), northeast: LatLng(n, e));
 }

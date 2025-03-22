@@ -8,7 +8,7 @@ class _PointSelector extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final localizations = AppLocalizations.of(context)!;
-    final point = ref.watch(_pointProvider(pointType));
+    final point = ref.watch(pointProvider(pointType));
 
     final String hintText;
     final String selectorTitle;
@@ -31,7 +31,7 @@ class _PointSelector extends ConsumerWidget {
         );
         if (res != null) {
           ref
-              .read(_pointProvider(pointType).notifier)
+              .read(pointProvider(pointType).notifier)
               .newLocation(res.id, res.name);
         }
       },

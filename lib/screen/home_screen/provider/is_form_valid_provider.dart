@@ -4,10 +4,10 @@ part of '../home_screen.dart';
 bool _isFormValid(Ref ref) {
   final values = [
     for (final pointType in PointType.values)
-      ref.watch(_pointProvider(pointType)),
-    ref.watch(_passengersProvider),
-    ref.watch(_dateProvider),
-    ref.watch(_timeProvider),
+      ref.watch(pointProvider(pointType))?.position,
+    ref.watch(passengersProvider),
+    ref.watch(dateProvider),
+    ref.watch(timeProvider),
   ];
 
   return values.every((e) => e != null);

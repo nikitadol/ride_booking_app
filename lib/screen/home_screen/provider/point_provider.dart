@@ -5,7 +5,7 @@ enum PointType { pickUp, dropOff }
 typedef PointData = ({String name, LatLng? position, String? id});
 
 @riverpod
-class _Point extends _$Point {
+class Point extends _$Point {
   @override
   PointData? build(PointType type) {
     return null;

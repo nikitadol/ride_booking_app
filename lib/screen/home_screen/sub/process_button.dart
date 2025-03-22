@@ -9,7 +9,17 @@ class _ProcessButton extends ConsumerWidget {
     final isFormValid = ref.watch(_isFormValidProvider);
 
     return FilledButton(
-      onPressed: isFormValid ? () {} : null,
+      onPressed:
+          isFormValid
+              ? () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ConfirmScreen(),
+                  ),
+                );
+              }
+              : null,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(

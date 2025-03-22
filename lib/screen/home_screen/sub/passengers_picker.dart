@@ -7,7 +7,7 @@ class _PassengersPicker extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final localizations = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
-    final passengers = ref.watch(_passengersProvider);
+    final passengers = ref.watch(passengersProvider);
 
     return Row(
       children: [
@@ -30,7 +30,7 @@ class _PassengersPicker extends ConsumerWidget {
               children: [
                 IconButton(
                   onPressed:
-                      () => ref.read(_passengersProvider.notifier).decrease(),
+                      () => ref.read(passengersProvider.notifier).decrease(),
                   icon: const Icon(Icons.remove),
                 ),
                 const SizedBox(
@@ -39,7 +39,7 @@ class _PassengersPicker extends ConsumerWidget {
                 ),
                 IconButton(
                   onPressed:
-                      () => ref.read(_passengersProvider.notifier).increase(),
+                      () => ref.read(passengersProvider.notifier).increase(),
                   icon: const Icon(Icons.add),
                 ),
               ],

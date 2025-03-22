@@ -6,7 +6,7 @@ class _DatePicker extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final localizations = AppLocalizations.of(context)!;
-    final date = ref.watch(_dateProvider);
+    final date = ref.watch(dateProvider);
     final materialLocalizations = MaterialLocalizations.of(context);
 
     final String text;
@@ -29,7 +29,7 @@ class _DatePicker extends ConsumerWidget {
         );
 
         if (res != null) {
-          ref.read(_dateProvider.notifier).newDate(res);
+          ref.read(dateProvider.notifier).newDate(res);
         }
       },
       borderRadius: const BorderRadius.horizontal(

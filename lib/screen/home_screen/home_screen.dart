@@ -10,6 +10,7 @@ import 'package:ride_booking_app/constants/constants.dart';
 import 'package:ride_booking_app/localization/app_localizations.dart';
 import 'package:ride_booking_app/repository/location_autocomplete_repository.dart';
 import 'package:ride_booking_app/screen/choose_location_screen/choose_location_screen.dart';
+import 'package:ride_booking_app/screen/confirm_screen.dart';
 import 'package:ride_booking_app/widget/bottom_gap.dart';
 import 'package:ride_booking_app/widget/self_sized_bottom_sheet.dart';
 import 'package:ride_booking_app/widget/status_bar_dimmer.dart';

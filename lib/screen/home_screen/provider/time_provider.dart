@@ -1,7 +1,7 @@
 part of '../home_screen.dart';
 
 @riverpod
-class _Time extends _$Time {
+class Time extends _$Time {
   @override
   TimeOfDay? build() {
     return null;
