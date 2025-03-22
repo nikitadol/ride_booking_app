@@ -24,26 +24,35 @@ class _SelfSizedBottomSheetState extends State<SelfSizedBottomSheet> {
     RendererBinding.instance.deferFirstFrame();
   }
 
-  void _trackBottomSheetContent() {
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      if (!_wasFirstFrame) {
-        RendererBinding.instance.allowFirstFrame();
-        _wasFirstFrame = true;
-      }
+  void _handleChangesSafe() {
+    if (SchedulerBinding.instance.schedulerPhase ==
+        SchedulerPhase.postFrameCallbacks) {
+      _handleChanges();
+    } else {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        _handleChanges();
+      });
+    }
+  }
 
-      final height = _bottomSheetContentKey.currentContext?.size?.height;
+  void _handleChanges() {
+    if (!_wasFirstFrame) {
+      RendererBinding.instance.allowFirstFrame();
+      _wasFirstFrame = true;
+    }
 
-      if (height != null && height != _bottomSheetContentHeight) {
-        setState(() {
-          _bottomSheetContentHeight = height;
-        });
-      }
-    });
+    final height = _bottomSheetContentKey.currentContext?.size?.height;
+
+    if (height != null && height != _bottomSheetContentHeight) {
+      setState(() {
+        _bottomSheetContentHeight = height;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    _trackBottomSheetContent();
+    _handleChangesSafe();
 
     const borderRadius = BorderRadius.vertical(top: Radius.circular(16));
     final theme = Theme.of(context);
@@ -56,32 +65,46 @@ class _SelfSizedBottomSheetState extends State<SelfSizedBottomSheet> {
             (padding.bottom + kBottomNavigationBarHeight) /
             constraints.maxHeight;
 
-        return DraggableScrollableSheet(
-          maxChildSize: maxChildSize,
-          initialChildSize: maxChildSize,
-          minChildSize: minChildSize,
-          expand: false,
-          shouldCloseOnMinExtent: false,
-          builder: (context, scrollController) {
-            return DecoratedBox(
-              decoration: BoxDecoration(
-                color: theme.colorScheme.surfaceContainerLow,
-                boxShadow: kElevationToShadow[24],
-                borderRadius: borderRadius,
-              ),
-              child: ClipRRect(
-                borderRadius: borderRadius,
-                child: SingleChildScrollView(
-                  physics: const ClampingScrollPhysics(),
-                  controller: scrollController,
-                  child: KeyedSubtree(
-                    key: _bottomSheetContentKey,
-                    child: widget.child,
+        return ScrollConfiguration(
+          behavior: ScrollConfiguration.of(
+            context,
+          ).copyWith(physics: const ClampingScrollPhysics()),
+          child: DraggableScrollableSheet(
+            maxChildSize: maxChildSize,
+            initialChildSize: maxChildSize,
+            minChildSize: minChildSize,
+            expand: false,
+            snap: true,
+            snapSizes: [minChildSize, maxChildSize],
+            shouldCloseOnMinExtent: false,
+            builder: (context, scrollController) {
+              return DecoratedBox(
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.surfaceContainerLow,
+                  boxShadow: kElevationToShadow[24],
+                  borderRadius: borderRadius,
+                ),
+                child: ClipRRect(
+                  borderRadius: borderRadius,
+                  child: NotificationListener<SizeChangedLayoutNotification>(
+                    onNotification: (n) {
+                      _handleChangesSafe();
+
+                      return false;
+                    },
+                    child: SingleChildScrollView(
+                      physics: const ClampingScrollPhysics(),
+                      controller: scrollController,
+                      child: KeyedSubtree(
+                        key: _bottomSheetContentKey,
+                        child: SizeChangedLayoutNotifier(child: widget.child),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         );
       },
     );

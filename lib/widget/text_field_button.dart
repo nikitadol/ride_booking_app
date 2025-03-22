@@ -44,7 +44,10 @@ class _TextFieldButtonState extends State<TextFieldButton> {
     return TextField(
       readOnly: true,
       canRequestFocus: false,
+      enableInteractiveSelection: false,
       controller: _controller,
+      maxLines: 2,
+      minLines: 1,
       onTap: widget.onTap,
       decoration: InputDecoration(
         labelText: widget.hintText,
