@@ -5,7 +5,7 @@ Future<List<AutocompleteItem>> _autocompleteByTerm(Ref ref, String term) async {
   final locationAutocomplete = ref.watch(
     locationAutocompleteRepositoryProvider,
   );
-  final sessionToken = ref.watch(_sessionTokenProvider);
+  final sessionToken = ref.watch(autocompleteSessionTokenProvider);
 
   final termTrimmed = term.trim();
 

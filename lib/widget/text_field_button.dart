@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class TextFieldButton extends StatelessWidget {
+class TextFieldButton extends StatefulWidget {
   const TextFieldButton({
     super.key,
+    required this.hintText,
     required this.text,
-    this.controller,
     this.onTap,
     this.borderRadius,
     this.suffixIcon,
@@ -12,26 +12,49 @@ class TextFieldButton extends StatelessWidget {
 
   static const defaultRadius = Radius.circular(16);
 
-  final TextEditingController? controller;
   final GestureTapCallback? onTap;
+  final String hintText;
   final String text;
   final BorderRadius? borderRadius;
   final Widget? suffixIcon;
+
+  @override
+  State<TextFieldButton> createState() => _TextFieldButtonState();
+}
+
+class _TextFieldButtonState extends State<TextFieldButton> {
+  late final _controller = TextEditingController(text: widget.text);
+
+  @override
+  void didUpdateWidget(covariant TextFieldButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    _controller.text = widget.text;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    _controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       readOnly: true,
       canRequestFocus: false,
-      controller: controller,
-      onTap: onTap,
+      controller: _controller,
+      onTap: widget.onTap,
       decoration: InputDecoration(
-        labelText: text,
+        labelText: widget.hintText,
         filled: true,
-        suffixIcon: suffixIcon,
+        suffixIcon: widget.suffixIcon,
         border: OutlineInputBorder(
           borderSide: BorderSide.none,
-          borderRadius: borderRadius ?? const BorderRadius.all(defaultRadius),
+          borderRadius:
+              widget.borderRadius ??
+              const BorderRadius.all(TextFieldButton.defaultRadius),
         ),
       ),
     );

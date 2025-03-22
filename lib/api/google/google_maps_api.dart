@@ -32,7 +32,7 @@ abstract class GoogleMapsApi {
   Future<GooglePlaceDetailsResponse> placeDetails({
     @Query('place_id') required String placeId,
     @Query('language') required String language,
-    @Query('fields') required String fields,
+    @Query('fields') String fields = 'geometry/location',
     @Query('sessiontoken') required String sessionToken,
     @Query('key') required String apiKey,
   });

@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ride_booking_app/common/provider/autocomplete_session_token_provider.dart';
 import 'package:ride_booking_app/component/error_component.dart';
 import 'package:ride_booking_app/repository/location_autocomplete_repository.dart';
 import 'package:ride_booking_app/utils/riverpod.dart';
 import 'package:ride_booking_app/utils/text_span.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:uuid/uuid.dart';
-
-part 'sub/content.dart';
-
-part 'provider/autocomplete_by_term_provider.dart';
-
-part 'provider/session_token_provider.dart';
 
 part 'choose_location_screen.g.dart';
+part 'provider/autocomplete_by_term_provider.dart';
+part 'sub/content.dart';
 
 typedef ChooseLocationScreenResult = ({String id, String name});
 
@@ -44,35 +39,6 @@ class ChooseLocationScreen extends StatefulWidget {
 
 class _ChooseLocationScreenState extends State<ChooseLocationScreen> {
   final _searchTextController = TextEditingController();
-  final _scaffoldKey = GlobalKey();
-
-  @override
-  void initState() {
-    super.initState();
-
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      ScaffoldFeatureController<MaterialBanner, MaterialBannerClosedReason>?
-      controller;
-
-      void close() {
-        controller?.close();
-      }
-
-      controller = ScaffoldMessenger.of(
-        _scaffoldKey.currentContext!,
-      ).showMaterialBanner(
-        MaterialBanner(
-          content: const Text('You can select points directly on map'),
-          actions: [
-            TextButton(
-              onPressed: close,
-              child: const Text('Ok'),
-            ),
-          ],
-        ),
-      );
-    });
-  }
 
   @override
   void dispose() {
@@ -84,7 +50,6 @@ class _ChooseLocationScreenState extends State<ChooseLocationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       appBar: AppBar(
         title: Text(widget.title),
         leading: const CloseButton(),

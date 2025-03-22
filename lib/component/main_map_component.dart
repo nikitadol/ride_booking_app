@@ -25,6 +25,7 @@ class MainMapComponent extends StatefulWidget {
     required String id,
     required LatLng position,
     required double iconColor,
+    double zIndex = 0.0,
     VoidCallback? onTap,
   }) {
     return Marker(
@@ -32,6 +33,7 @@ class MainMapComponent extends StatefulWidget {
       position: position,
       icon: BitmapDescriptor.defaultMarkerWithHue(iconColor),
       onTap: onTap,
+      zIndex: zIndex,
     );
   }
 
