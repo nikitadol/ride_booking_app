@@ -6,6 +6,10 @@
             android:label="ride_booking_app"
             android:name="${applicationName}"
             android:icon="@mipmap/ic_launcher">
+        <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="${GOOGLE_MAPS_KEY}" />
+
         <activity
                 android:name=".MainActivity"
                 android:exported="true"
@@ -22,9 +26,6 @@
             <meta-data
                     android:name="io.flutter.embedding.android.NormalTheme"
                     android:resource="@style/NormalTheme" />
-            <meta-data
-                    android:name="com.google.android.geo.API_KEY"
-                    android:value="${GOOGLE_MAPS_API_KEY}" />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
