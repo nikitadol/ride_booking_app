@@ -5,13 +5,17 @@ class _ProcessButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final localizations = AppLocalizations.of(context)!;
     final isFormValid = ref.watch(_isFormValidProvider);
 
     return FilledButton(
       onPressed: isFormValid ? () {} : null,
-      child: const Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Text('Process', style: TextStyle(fontSize: 20)),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          localizations.process,
+          style: const TextStyle(fontSize: 20),
+        ),
       ),
     );
   }

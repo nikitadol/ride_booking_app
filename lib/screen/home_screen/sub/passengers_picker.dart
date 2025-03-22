@@ -5,6 +5,7 @@ class _PassengersPicker extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final localizations = AppLocalizations.of(context)!;
     final theme = Theme.of(context);
     final passengers = ref.watch(_passengersProvider);
 
@@ -13,7 +14,7 @@ class _PassengersPicker extends ConsumerWidget {
         Expanded(
           child: TextFieldButton(
             text: passengers?.toString() ?? '',
-            hintText: 'Passengers',
+            hintText: localizations.passengers,
           ),
         ),
         const Gap(4),

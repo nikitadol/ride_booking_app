@@ -5,6 +5,7 @@ class _TimePicker extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final localizations = AppLocalizations.of(context)!;
     final time = ref.watch(_timeProvider);
 
     final String text;
@@ -16,11 +17,11 @@ class _TimePicker extends ConsumerWidget {
 
     return TextFieldButton(
       text: text,
-      hintText: 'Time',
+      hintText: localizations.time,
       onTap: () async {
         final res = await showTimePicker(
           context: context,
-          helpText: 'Select pick-up time',
+          helpText: localizations.selectPickUpTime,
           initialTime: time ?? TimeOfDay.now(),
         );
 

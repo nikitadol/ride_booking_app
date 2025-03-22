@@ -5,6 +5,7 @@ class _DatePicker extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final localizations = AppLocalizations.of(context)!;
     final date = ref.watch(_dateProvider);
     final materialLocalizations = MaterialLocalizations.of(context);
 
@@ -18,11 +19,11 @@ class _DatePicker extends ConsumerWidget {
 
     return TextFieldButton(
       text: text,
-      hintText: 'Date',
+      hintText: localizations.date,
       onTap: () async {
         final res = await showDatePicker(
           context: context,
-          helpText: 'Select pick-up date',
+          helpText: localizations.selectPickUpDate,
           firstDate: DateTime.now(),
           lastDate: DateTime.now().add(AppConstants.maxFutureDateDif),
         );

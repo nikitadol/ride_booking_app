@@ -1,0 +1,18 @@
+{
+  "ok": "Ok",
+  "mapTip": "You can select points directly on map",
+  "pickUp": "Pick-up",
+  "pickUpLocation": "Pick-up location",
+  "dropOff": "Drop-off",
+  "dropOffLocation": "Drop-off location",
+  "date": "Date",
+  "selectPickUpDate": "Select pick-up date",
+  "usePoint": "Use point...",
+  "asPickUp": "As pick-up",
+  "asDropOff": "As drop-off",
+  "passengers": "Passengers",
+  "process": "Process",
+  "time": "Time",
+  "selectPickUpTime": "Select pick-up time",
+  "typeSomething": "Type something"
+}

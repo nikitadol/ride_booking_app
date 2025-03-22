@@ -6,6 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ride_booking_app/common/provider/autocomplete_session_token_provider.dart';
 import 'package:ride_booking_app/component/main_map_component.dart';
 import 'package:ride_booking_app/constants/constants.dart';
+import 'package:ride_booking_app/localization/app_localizations.dart';
 import 'package:ride_booking_app/repository/location_autocomplete_repository.dart';
 import 'package:ride_booking_app/screen/choose_location_screen/choose_location_screen.dart';
 import 'package:ride_booking_app/widget/bottom_gap.dart';
@@ -24,6 +25,7 @@ part 'sub/bottom_sheet_content.dart';
 part 'sub/date_picker.dart';
 part 'sub/maps.dart';
 part 'sub/passengers_picker.dart';
+part 'sub/point_selector.dart';
 part 'sub/process_button.dart';
 part 'sub/time_picker.dart';
 
@@ -50,12 +52,16 @@ class _HomeScreenState extends State<HomeScreen> {
         controller?.close();
       }
 
+      final localizations = AppLocalizations.of(context)!;
+
       controller = ScaffoldMessenger.of(
         _scaffoldKey.currentContext!,
       ).showMaterialBanner(
         MaterialBanner(
-          content: const Text('You can select points directly on map'),
-          actions: [TextButton(onPressed: close, child: const Text('Ok'))],
+          content: Text(localizations.mapTip),
+          actions: [
+            TextButton(onPressed: close, child: Text(localizations.ok)),
+          ],
         ),
       );
     });

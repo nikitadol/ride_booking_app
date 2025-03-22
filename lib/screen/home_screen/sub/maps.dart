@@ -16,6 +16,7 @@ class _Maps extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final localizations = AppLocalizations.of(context)!;
     final pickUpPoint = ref.watch(_pointProvider(PointType.pickUp))?.position;
     final dropOffPoint = ref.watch(_pointProvider(PointType.dropOff))?.position;
 
@@ -32,15 +33,15 @@ class _Maps extends ConsumerWidget {
           context: context,
           builder:
               (context) => AlertDialog(
-                title: const Text('Use point...'),
+                title: Text(localizations.usePoint),
                 actions: [
                   TextButton(
                     onPressed: select(PointType.pickUp),
-                    child: const Text('As pick-up'),
+                    child: Text(localizations.asPickUp),
                   ),
                   TextButton(
                     onPressed: select(PointType.dropOff),
-                    child: const Text('As drop-off'),
+                    child: Text(localizations.asDropOff),
                   ),
                 ],
               ),

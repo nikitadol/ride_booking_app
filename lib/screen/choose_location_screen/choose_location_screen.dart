@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ride_booking_app/common/provider/autocomplete_session_token_provider.dart';
 import 'package:ride_booking_app/component/error_component.dart';
+import 'package:ride_booking_app/localization/app_localizations.dart';
 import 'package:ride_booking_app/repository/location_autocomplete_repository.dart';
 import 'package:ride_booking_app/utils/riverpod.dart';
 import 'package:ride_booking_app/utils/text_span.dart';
@@ -49,6 +50,8 @@ class _ChooseLocationScreenState extends State<ChooseLocationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -58,9 +61,9 @@ class _ChooseLocationScreenState extends State<ChooseLocationScreen> {
           child: TextField(
             controller: _searchTextController,
             autofocus: true,
-            decoration: const InputDecoration(
-              hintText: 'Type something',
-              contentPadding: EdgeInsets.all(16),
+            decoration: InputDecoration(
+              hintText: localizations.typeSomething,
+              contentPadding: const EdgeInsets.all(16),
             ),
           ),
         ),
